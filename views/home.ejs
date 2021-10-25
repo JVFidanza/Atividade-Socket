@@ -13,14 +13,18 @@
   <ul id='lista'>
   </ul>
   <script>
-    const showNumber = (data)=>{
+    const renderCard = (data)=>{
       const lista = document.querySelector('#lista');
       const li = document.createElement('li');
       li.innerText = data;
       lista.appendChild(li);
     }
     const socket = window.io('http://localhost:3000');
-    socket.on('home',(data)=>showNumber(data))
+    socket.on('home',(data)=>{
+      data.forEach((element)=>{
+        renderCard(data);
+      })
+    })
 
   </script>
 </body>

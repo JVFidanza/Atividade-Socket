@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const { getAll } = require('./models/produtos');
 
 const { PORT } = process.env;
 
@@ -14,9 +15,9 @@ const io = require('socket.io')(serverSocket, {
   },
 });
 
-const numero = 0;
-io.on('connection', (socket) => {
-  socket.emit('home', numero);
+io.on('connection', async (socket) => {
+  const produtos = await getAll();
+  socket.emit('home', produtos);
 });
 
 // const controllers = require('./controllers');
