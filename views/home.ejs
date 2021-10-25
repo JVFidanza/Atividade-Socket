@@ -11,17 +11,16 @@
 <body>
   <h1>HOME</h1>
   <ul id='lista'>
-    <li><%=numero%></li>
   </ul>
   <script>
-    // const showNumber = (data)=>{
-    //   const lista = document.querySelector('#lista');
-    //   const li = document.createElement('li');
-    //   li.innerText = data;
-    //   lista.appendChild(li);
-    // }
-    // const socket = window.io('http://localhost:3000');
-    // socket.on('home',(data)=>showNumber(data))
+    const showNumber = (data)=>{
+      const lista = document.querySelector('#lista');
+      const li = document.createElement('li');
+      li.innerText = data;
+      lista.appendChild(li);
+    }
+    const socket = window.io('http://localhost:3000');
+    socket.on('home',(data)=>showNumber(data))
 
   </script>
 </body>
