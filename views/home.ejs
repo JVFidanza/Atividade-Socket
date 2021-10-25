@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../App.css">
   <script src="/socket.io/socket.io.js">
   </script>
   <title>Leilão</title>
@@ -16,13 +17,20 @@
     const renderCard = (data)=>{
       const lista = document.querySelector('#lista');
       const li = document.createElement('li');
-      li.innerText = data;
+      const li2 = document.createElement('li');
+      const img = document.createElement('img');
+      img.src = data.imagem;
+      li.innerText = data.nome;
+      console.log(data);
       lista.appendChild(li);
+      lista.appendChild(img);
+      li2.innerText = data.valor;
+      lista.appendChild(li2);
     }
     const socket = window.io('http://localhost:3000');
     socket.on('home',(data)=>{
       data.forEach((element)=>{
-        renderCard(data);
+        renderCard(element);
       })
     })
 
