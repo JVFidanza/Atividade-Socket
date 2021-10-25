@@ -5,10 +5,25 @@ const bodyParser = require('body-parser');
 
 const { PORT } = process.env;
 
-const controllers = require('./controllers');
+const app = express();
+const serverSocket = require('http').createServer(app);
+const io = require('socket.io')(serverSocket, {
+  cors: {
+    origin: 'http://localhost:3000',
+    method: ['GET', 'POST'],
+  },
+});
+
+const numero = 0;
+io.on('connection', (socket) => {
+  socket.emit('home', numero);
+});
+
+// const controllers = require('./controllers');
 const middlewares = require('./middlewares');
 
-const app = express();
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
 app.use(
   cors({
@@ -21,10 +36,10 @@ app.use(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/ping', controllers.ping);
+app.get('/home', (req, res) => res.render('home'));
 
 app.use(middlewares.error);
 
-app.listen(PORT, () => {
+serverSocket.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
