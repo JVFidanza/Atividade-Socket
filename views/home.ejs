@@ -4,28 +4,34 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="../App.css">
+  <link rel="stylesheet" href="../public/assets/style.css">
   <script src="/socket.io/socket.io.js">
   </script>
   <title>Leilão</title>
 </head>
 <body>
   <h1>HOME</h1>
-  <ul id='lista'>
-  </ul>
+  <h1><%= teste %></h1>
+  <span id='cards'>
+  </span>
   <script>
-    const renderCard = (data)=>{
-      const lista = document.querySelector('#lista');
-      const li = document.createElement('li');
-      const li2 = document.createElement('li');
+    const renderCard = (data) => {
+      const cards = document.querySelector('#cards');
+      const div = document.createElement('div');
+      const produto = document.createElement('h2');
+      const valor = document.createElement('h2');
       const img = document.createElement('img');
+      const button = document.createElement('button');
+      button.innerHTML = 'Dar um lance';
       img.src = data.imagem;
-      li.innerText = data.nome;
-      console.log(data);
-      lista.appendChild(li);
-      lista.appendChild(img);
-      li2.innerText = data.valor;
-      lista.appendChild(li2);
+      produto.innerText = data.nome;
+      valor.innerText = data.valor;
+      button.addEventListener('click',(event)=>console.log(event));
+      div.appendChild(produto);
+      div.appendChild(img);
+      div.appendChild(valor);
+      div.appendChild(button);
+      cards.appendChild(div);
     }
     const socket = window.io('http://localhost:3000');
     socket.on('home',(data)=>{
