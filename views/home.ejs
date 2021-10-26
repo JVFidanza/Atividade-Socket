@@ -26,7 +26,7 @@
       img.src = data.imagem;
       produto.innerText = data.nome;
       valor.innerText = data.valor;
-      button.addEventListener('click',(event)=>console.log(event));
+      button.addEventListener('click',(event)=>event.target.innerText = 'lance coisado');
       div.appendChild(produto);
       div.appendChild(img);
       div.appendChild(valor);
